@@ -26,7 +26,22 @@ namespace Arvauspeli
         private void ArvausTeksti_TextChanged(object sender, EventArgs e)
         {
             arvaus = Convert.ToInt32(ArvausTeksti.Text);
-            Vastausteksti.Text = "Minun lukuni on " + (arvaus + 1) + " hävisit niukasti!";
+            Random rnd = new Random();
+            int kone = rnd.Next(1, 11);
+            if(arvaus > kone)
+            {
+                Vastausteksti.Text = "Sinun lukusi " + arvaus + " on suurempi \n kuin minun lukuni " + kone + " VOITIT!";
+            }
+            else if (kone > arvaus)
+            {
+                Vastausteksti.Text = "Minun lukuni " + kone + " on suurempi \n kuin sinun lukusi " + arvaus + " VOITIN!";
+
+            }
+            else
+            {
+                Vastausteksti.Text = "Tuli tasapeli";
+
+            }
         }
     }
 }
