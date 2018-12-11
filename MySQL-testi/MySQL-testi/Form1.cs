@@ -21,7 +21,6 @@ namespace MySQL_testi
         MySqlConnection connection = new MySqlConnection("database=firma;datasource = localhost;user=root;password=");
         MySqlCommand command;
         MySqlDataAdapter adapter;
-        DataTable table = new DataTable();
         //BindingManagerBase managerBase;
         //MySqlCommandBuilder builder;
 
@@ -243,7 +242,25 @@ namespace MySQL_testi
 
         private void ValintaPainikeS4_Click(object sender, EventArgs e)
         {
+            if (HenkilostoPainikeS4.Checked == true)
+            {
+                MuutosPaneeli1.Visible = false;
+                KaikkiPaneeli.Visible = true;
+            }
+            if (OsastoPainikeS4.Checked == true)
+            {
+                MuutosPaneeli1.Visible = false;
+                OsastonMuutosPaneeli.Visible = true;
 
+            }
+            if (ProjektiPainikeS4.Checked == true)
+            {
+               MuutosPaneeli1.Visible = false;
+            }
+            if (AikatauluPainikeS4.Checked == true)
+            {
+               MuutosPaneeli1.Visible = false;
+            }
         }
 
         private void PaluuPainike_Click(object sender, EventArgs e)
@@ -406,9 +423,11 @@ namespace MySQL_testi
 
         private void KaikkiPaneeli_Paint(object sender, PaintEventArgs e)
         {
+           
             string query = "SELECT DISTINCT (htun), enimi, snimi, kunta, tutkinto, palkka, veroprosentti, ostunnus FROM henkilo";
             command = new MySqlCommand(query, connection);
             adapter = new MySqlDataAdapter(command);
+            DataTable table = new DataTable();
             //connection.Open();
             adapter.Fill(table);
             KaikkiYleisNakyma.DataSource = table;
@@ -500,6 +519,109 @@ namespace MySQL_testi
             kysely = "DELETE FROM firma.henkilo WHERE htun = '" + tunnari + "'";
             ajaLisays(kysely);
 
+        }
+
+        private void ValintaPainikeS5_Click(object sender, EventArgs e)
+        {
+            if(HenkilostoPoistoPainike.Checked == true)
+            {
+                PoistoPaneeli1.Visible = false;
+                KaikkiPaneeli.Visible = true;
+            }
+            if(OsastoPainikeS5.Checked == true)
+            {
+                PoistoPaneeli1.Visible = false;
+                OsastonMuutosPaneeli.Visible = true;
+
+            }
+            if(ProjektiPainikeS5.Checked == true)
+            {
+                PoistoPaneeli1.Visible = false;
+            }
+            if(AikatauluPainikeS5.Checked == true)
+            {
+                PoistoPaneeli1.Visible = false;
+            }
+        }
+
+        private void OsastonMuutosPaneeli_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+        private void TaytaOsastoKentat()
+        {
+            OsastoIDText.Text = OsastoYleisNakyma.CurrentRow.Cells[0].Value.ToString();
+            OsastoNimiText.Text = OsastoYleisNakyma.CurrentRow.Cells[1].Value.ToString();
+            OsastonKoodiText.Text = OsastoYleisNakyma.CurrentRow.Cells[2].Value.ToString();
+        }
+
+        private void TyhjaaOsastoKentat()
+        {
+            OsastoIDText.Text = "";
+            OsastoNimiText.Text = "";
+            OsastonKoodiText.Text = "";
+
+        }
+
+        private void OsastoYleisNakyma_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // tee jotain
+        }
+
+        private void OsastoYleisNakyma_Paint(object sender, PaintEventArgs e)
+        {
+            TaytaOsastoKentat();
+        }
+
+        private void UusiOsastoPainike_Click(object sender, EventArgs e)
+        {
+            TyhjaaOsastoKentat();
+        }
+
+        private void LisaaOsastoPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int osastoID = Convert.ToInt32(OsastoIDText.Text);
+            string osastoNimi = OsastoNimiText.Text;
+            string osastoKoodi = OsastonKoodiText.Text;
+            kysely = "INSERT INTO firma.osasto VALUES ('" + osastoID + "', '" +
+                osastoNimi + "', '" + osastoKoodi + "')";
+            ajaLisays(kysely);
+        }
+
+        private void OsastonMuutosPaneeli_Enter(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void OsastonMuutosPaneeli_VisibleChanged(object sender, EventArgs e)
+        {
+            string query = "SELECT* FROM osasto";
+            command = new MySqlCommand(query, connection);
+            adapter = new MySqlDataAdapter(command);
+            DataTable osasto = new DataTable();
+            adapter.Fill(osasto);
+            OsastoYleisNakyma.DataSource = osasto;
+        }
+
+        private void PaivitaOsastoPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int osastoID = Convert.ToInt32(OsastoIDText.Text);
+            string osastoNimi = OsastoNimiText.Text;
+            string osastoKoodi = OsastonKoodiText.Text;
+            kysely = "UPDATE firma.osasto SET osnimi = '" + osastoNimi + 
+                "', koodi = '" + osastoKoodi + "' WHERE ostun = '" + osastoID + "'";
+            ajaLisays(kysely);
+
+        }
+
+        private void PoistaOsastoPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int osastoID = Convert.ToInt32(OsastoIDText.Text);
+            kysely = "DELETE FROM firma.osasto WHERE ostun = '" + osastoID + "'";
+            ajaLisays(kysely);
         }
     }
 }

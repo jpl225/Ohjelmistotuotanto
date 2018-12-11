@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.RadioButton OsastoPainikeS5;
+            this.OsastoPainikeS5 = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.KyselyLaatikkoS1 = new System.Windows.Forms.GroupBox();
             this.PoistoNappi = new System.Windows.Forms.RadioButton();
@@ -73,7 +73,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.AikatauluPainikeS5 = new System.Windows.Forms.RadioButton();
             this.ProjektiPainikeS5 = new System.Windows.Forms.RadioButton();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
+            this.HenkilostoPoistoPainike = new System.Windows.Forms.RadioButton();
             this.label4 = new System.Windows.Forms.Label();
             this.HenkilostoLisaysPaneeli = new System.Windows.Forms.Panel();
             this.HenkilostoLisaysOtsikko = new System.Windows.Forms.Label();
@@ -154,7 +154,19 @@
             this.KaikkiEtunimiText = new System.Windows.Forms.TextBox();
             this.label28 = new System.Windows.Forms.Label();
             this.KaikkiHloText = new System.Windows.Forms.TextBox();
-            OsastoPainikeS5 = new System.Windows.Forms.RadioButton();
+            this.OsastonMuutosPaneeli = new System.Windows.Forms.Panel();
+            this.PoistaOsastoPainike = new System.Windows.Forms.Button();
+            this.PaivitaOsastoPainike = new System.Windows.Forms.Button();
+            this.LisaaOsastoPainike = new System.Windows.Forms.Button();
+            this.UusiOsastoPainike = new System.Windows.Forms.Button();
+            this.OsastoYleisNakyma = new System.Windows.Forms.DataGridView();
+            this.label40 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.OsastonKoodiText = new System.Windows.Forms.TextBox();
+            this.OsastoNimiText = new System.Windows.Forms.TextBox();
+            this.OsastoIDText = new System.Windows.Forms.TextBox();
+            this.label36 = new System.Windows.Forms.Label();
             this.KyselyLaatikkoS1.SuspendLayout();
             this.AlkuPaneeli.SuspendLayout();
             this.KatseluPaneeli1.SuspendLayout();
@@ -173,18 +185,20 @@
             this.ProjektiHenkiloPaneeli.SuspendLayout();
             this.KaikkiPaneeli.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KaikkiYleisNakyma)).BeginInit();
+            this.OsastonMuutosPaneeli.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OsastoYleisNakyma)).BeginInit();
             this.SuspendLayout();
             // 
             // OsastoPainikeS5
             // 
-            OsastoPainikeS5.AutoSize = true;
-            OsastoPainikeS5.Location = new System.Drawing.Point(7, 44);
-            OsastoPainikeS5.Name = "OsastoPainikeS5";
-            OsastoPainikeS5.Size = new System.Drawing.Size(58, 17);
-            OsastoPainikeS5.TabIndex = 1;
-            OsastoPainikeS5.TabStop = true;
-            OsastoPainikeS5.Text = "Osasto";
-            OsastoPainikeS5.UseVisualStyleBackColor = true;
+            this.OsastoPainikeS5.AutoSize = true;
+            this.OsastoPainikeS5.Location = new System.Drawing.Point(7, 44);
+            this.OsastoPainikeS5.Name = "OsastoPainikeS5";
+            this.OsastoPainikeS5.Size = new System.Drawing.Size(58, 17);
+            this.OsastoPainikeS5.TabIndex = 1;
+            this.OsastoPainikeS5.TabStop = true;
+            this.OsastoPainikeS5.Text = "Osasto";
+            this.OsastoPainikeS5.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -506,7 +520,7 @@
             this.MuutosPaneeli1.Controls.Add(this.ValintaPainikeS4);
             this.MuutosPaneeli1.Controls.Add(this.groupBox2);
             this.MuutosPaneeli1.Controls.Add(this.label3);
-            this.MuutosPaneeli1.Location = new System.Drawing.Point(694, 27);
+            this.MuutosPaneeli1.Location = new System.Drawing.Point(905, 132);
             this.MuutosPaneeli1.Name = "MuutosPaneeli1";
             this.MuutosPaneeli1.Size = new System.Drawing.Size(213, 207);
             this.MuutosPaneeli1.TabIndex = 5;
@@ -603,7 +617,7 @@
             this.PoistoPaneeli1.Controls.Add(this.ValintaPainikeS5);
             this.PoistoPaneeli1.Controls.Add(this.groupBox3);
             this.PoistoPaneeli1.Controls.Add(this.label4);
-            this.PoistoPaneeli1.Location = new System.Drawing.Point(475, 27);
+            this.PoistoPaneeli1.Location = new System.Drawing.Point(1124, 132);
             this.PoistoPaneeli1.Name = "PoistoPaneeli1";
             this.PoistoPaneeli1.Size = new System.Drawing.Size(213, 207);
             this.PoistoPaneeli1.TabIndex = 6;
@@ -627,13 +641,14 @@
             this.ValintaPainikeS5.TabIndex = 4;
             this.ValintaPainikeS5.Text = "Valitse";
             this.ValintaPainikeS5.UseVisualStyleBackColor = true;
+            this.ValintaPainikeS5.Click += new System.EventHandler(this.ValintaPainikeS5_Click);
             // 
             // groupBox3
             // 
             this.groupBox3.Controls.Add(this.AikatauluPainikeS5);
             this.groupBox3.Controls.Add(this.ProjektiPainikeS5);
-            this.groupBox3.Controls.Add(OsastoPainikeS5);
-            this.groupBox3.Controls.Add(this.radioButton4);
+            this.groupBox3.Controls.Add(this.OsastoPainikeS5);
+            this.groupBox3.Controls.Add(this.HenkilostoPoistoPainike);
             this.groupBox3.Location = new System.Drawing.Point(23, 37);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(116, 122);
@@ -662,16 +677,16 @@
             this.ProjektiPainikeS5.Text = "Projektit";
             this.ProjektiPainikeS5.UseVisualStyleBackColor = true;
             // 
-            // radioButton4
+            // HenkilostoPoistoPainike
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(7, 20);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(75, 17);
-            this.radioButton4.TabIndex = 0;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Henkilöstö";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.HenkilostoPoistoPainike.AutoSize = true;
+            this.HenkilostoPoistoPainike.Location = new System.Drawing.Point(7, 20);
+            this.HenkilostoPoistoPainike.Name = "HenkilostoPoistoPainike";
+            this.HenkilostoPoistoPainike.Size = new System.Drawing.Size(75, 17);
+            this.HenkilostoPoistoPainike.TabIndex = 0;
+            this.HenkilostoPoistoPainike.TabStop = true;
+            this.HenkilostoPoistoPainike.Text = "Henkilöstö";
+            this.HenkilostoPoistoPainike.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
@@ -1258,11 +1273,12 @@
             this.KaikkiPaneeli.Controls.Add(this.KaikkiEtunimiText);
             this.KaikkiPaneeli.Controls.Add(this.label28);
             this.KaikkiPaneeli.Controls.Add(this.KaikkiHloText);
-            this.KaikkiPaneeli.Location = new System.Drawing.Point(37, 330);
+            this.KaikkiPaneeli.Location = new System.Drawing.Point(25, 27);
             this.KaikkiPaneeli.Margin = new System.Windows.Forms.Padding(2);
             this.KaikkiPaneeli.Name = "KaikkiPaneeli";
-            this.KaikkiPaneeli.Size = new System.Drawing.Size(913, 326);
+            this.KaikkiPaneeli.Size = new System.Drawing.Size(875, 326);
             this.KaikkiPaneeli.TabIndex = 11;
+            this.KaikkiPaneeli.Visible = false;
             this.KaikkiPaneeli.Paint += new System.Windows.Forms.PaintEventHandler(this.KaikkiPaneeli_Paint);
             // 
             // KaikkiYleisNakyma
@@ -1272,7 +1288,7 @@
             this.KaikkiYleisNakyma.Margin = new System.Windows.Forms.Padding(2);
             this.KaikkiYleisNakyma.Name = "KaikkiYleisNakyma";
             this.KaikkiYleisNakyma.RowTemplate.Height = 28;
-            this.KaikkiYleisNakyma.Size = new System.Drawing.Size(712, 274);
+            this.KaikkiYleisNakyma.Size = new System.Drawing.Size(687, 274);
             this.KaikkiYleisNakyma.TabIndex = 23;
             this.KaikkiYleisNakyma.Paint += new System.Windows.Forms.PaintEventHandler(this.KaikkiYleisNakyma_Paint);
             // 
@@ -1475,17 +1491,153 @@
             this.KaikkiHloText.Size = new System.Drawing.Size(68, 20);
             this.KaikkiHloText.TabIndex = 0;
             // 
+            // OsastonMuutosPaneeli
+            // 
+            this.OsastonMuutosPaneeli.Controls.Add(this.PoistaOsastoPainike);
+            this.OsastonMuutosPaneeli.Controls.Add(this.PaivitaOsastoPainike);
+            this.OsastonMuutosPaneeli.Controls.Add(this.LisaaOsastoPainike);
+            this.OsastonMuutosPaneeli.Controls.Add(this.UusiOsastoPainike);
+            this.OsastonMuutosPaneeli.Controls.Add(this.OsastoYleisNakyma);
+            this.OsastonMuutosPaneeli.Controls.Add(this.label40);
+            this.OsastonMuutosPaneeli.Controls.Add(this.label39);
+            this.OsastonMuutosPaneeli.Controls.Add(this.label38);
+            this.OsastonMuutosPaneeli.Controls.Add(this.OsastonKoodiText);
+            this.OsastonMuutosPaneeli.Controls.Add(this.OsastoNimiText);
+            this.OsastonMuutosPaneeli.Controls.Add(this.OsastoIDText);
+            this.OsastonMuutosPaneeli.Controls.Add(this.label36);
+            this.OsastonMuutosPaneeli.Location = new System.Drawing.Point(25, 27);
+            this.OsastonMuutosPaneeli.Name = "OsastonMuutosPaneeli";
+            this.OsastonMuutosPaneeli.Size = new System.Drawing.Size(627, 210);
+            this.OsastonMuutosPaneeli.TabIndex = 12;
+            this.OsastonMuutosPaneeli.Visible = false;
+            this.OsastonMuutosPaneeli.VisibleChanged += new System.EventHandler(this.OsastonMuutosPaneeli_VisibleChanged);
+            this.OsastonMuutosPaneeli.Paint += new System.Windows.Forms.PaintEventHandler(this.OsastonMuutosPaneeli_Paint);
+            this.OsastonMuutosPaneeli.Enter += new System.EventHandler(this.OsastonMuutosPaneeli_Enter);
+            // 
+            // PoistaOsastoPainike
+            // 
+            this.PoistaOsastoPainike.Location = new System.Drawing.Point(89, 160);
+            this.PoistaOsastoPainike.Margin = new System.Windows.Forms.Padding(2);
+            this.PoistaOsastoPainike.Name = "PoistaOsastoPainike";
+            this.PoistaOsastoPainike.Size = new System.Drawing.Size(49, 23);
+            this.PoistaOsastoPainike.TabIndex = 26;
+            this.PoistaOsastoPainike.Text = "Poista";
+            this.PoistaOsastoPainike.UseVisualStyleBackColor = true;
+            this.PoistaOsastoPainike.Click += new System.EventHandler(this.PoistaOsastoPainike_Click);
+            // 
+            // PaivitaOsastoPainike
+            // 
+            this.PaivitaOsastoPainike.Location = new System.Drawing.Point(142, 132);
+            this.PaivitaOsastoPainike.Margin = new System.Windows.Forms.Padding(2);
+            this.PaivitaOsastoPainike.Name = "PaivitaOsastoPainike";
+            this.PaivitaOsastoPainike.Size = new System.Drawing.Size(49, 23);
+            this.PaivitaOsastoPainike.TabIndex = 25;
+            this.PaivitaOsastoPainike.Text = "Paivita";
+            this.PaivitaOsastoPainike.UseVisualStyleBackColor = true;
+            this.PaivitaOsastoPainike.Click += new System.EventHandler(this.PaivitaOsastoPainike_Click);
+            // 
+            // LisaaOsastoPainike
+            // 
+            this.LisaaOsastoPainike.Location = new System.Drawing.Point(89, 132);
+            this.LisaaOsastoPainike.Margin = new System.Windows.Forms.Padding(2);
+            this.LisaaOsastoPainike.Name = "LisaaOsastoPainike";
+            this.LisaaOsastoPainike.Size = new System.Drawing.Size(49, 23);
+            this.LisaaOsastoPainike.TabIndex = 24;
+            this.LisaaOsastoPainike.Text = "Lisää";
+            this.LisaaOsastoPainike.UseVisualStyleBackColor = true;
+            this.LisaaOsastoPainike.Click += new System.EventHandler(this.LisaaOsastoPainike_Click);
+            // 
+            // UusiOsastoPainike
+            // 
+            this.UusiOsastoPainike.Location = new System.Drawing.Point(34, 132);
+            this.UusiOsastoPainike.Margin = new System.Windows.Forms.Padding(2);
+            this.UusiOsastoPainike.Name = "UusiOsastoPainike";
+            this.UusiOsastoPainike.Size = new System.Drawing.Size(49, 23);
+            this.UusiOsastoPainike.TabIndex = 23;
+            this.UusiOsastoPainike.Text = "Uusi";
+            this.UusiOsastoPainike.UseVisualStyleBackColor = true;
+            this.UusiOsastoPainike.Click += new System.EventHandler(this.UusiOsastoPainike_Click);
+            // 
+            // OsastoYleisNakyma
+            // 
+            this.OsastoYleisNakyma.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.OsastoYleisNakyma.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.OsastoYleisNakyma.Location = new System.Drawing.Point(225, 21);
+            this.OsastoYleisNakyma.Name = "OsastoYleisNakyma";
+            this.OsastoYleisNakyma.Size = new System.Drawing.Size(395, 182);
+            this.OsastoYleisNakyma.TabIndex = 7;
+            this.OsastoYleisNakyma.Paint += new System.Windows.Forms.PaintEventHandler(this.OsastoYleisNakyma_Paint);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Location = new System.Drawing.Point(20, 108);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(78, 13);
+            this.label40.TabIndex = 6;
+            this.label40.Text = "Osaston koodi:";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Location = new System.Drawing.Point(20, 81);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(70, 13);
+            this.label39.TabIndex = 5;
+            this.label39.Text = "Osaston nimi:";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Location = new System.Drawing.Point(20, 54);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(54, 13);
+            this.label38.TabIndex = 4;
+            this.label38.Text = "OsastoID:";
+            // 
+            // OsastonKoodiText
+            // 
+            this.OsastonKoodiText.Location = new System.Drawing.Point(109, 102);
+            this.OsastonKoodiText.Name = "OsastonKoodiText";
+            this.OsastonKoodiText.Size = new System.Drawing.Size(100, 20);
+            this.OsastonKoodiText.TabIndex = 3;
+            // 
+            // OsastoNimiText
+            // 
+            this.OsastoNimiText.Location = new System.Drawing.Point(109, 75);
+            this.OsastoNimiText.Name = "OsastoNimiText";
+            this.OsastoNimiText.Size = new System.Drawing.Size(100, 20);
+            this.OsastoNimiText.TabIndex = 2;
+            // 
+            // OsastoIDText
+            // 
+            this.OsastoIDText.Location = new System.Drawing.Point(109, 48);
+            this.OsastoIDText.Name = "OsastoIDText";
+            this.OsastoIDText.Size = new System.Drawing.Size(100, 20);
+            this.OsastoIDText.TabIndex = 1;
+            // 
+            // label36
+            // 
+            this.label36.AutoSize = true;
+            this.label36.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label36.Location = new System.Drawing.Point(17, 21);
+            this.label36.Name = "label36";
+            this.label36.Size = new System.Drawing.Size(188, 13);
+            this.label36.TabIndex = 0;
+            this.label36.Text = "Osaston lisäys, muutos ja poisto";
+            // 
             // HenkilostoPainikeS5
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1283, 781);
+            this.Controls.Add(this.OsastonMuutosPaneeli);
+            this.Controls.Add(this.KatseluPaneeli1);
             this.Controls.Add(this.KaikkiPaneeli);
             this.Controls.Add(this.PoistoPaneeli1);
             this.Controls.Add(this.MuutosPaneeli1);
             this.Controls.Add(this.AlkuPaneeli);
             this.Controls.Add(this.HenkilostoLisaysPaneeli);
-            this.Controls.Add(this.KatseluPaneeli1);
             this.Controls.Add(this.NayttoPaneeli);
             this.Controls.Add(this.ProjektiHenkiloPaneeli);
             this.Controls.Add(this.LisaysPaneeli1);
@@ -1527,6 +1679,9 @@
             this.KaikkiPaneeli.ResumeLayout(false);
             this.KaikkiPaneeli.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.KaikkiYleisNakyma)).EndInit();
+            this.OsastonMuutosPaneeli.ResumeLayout(false);
+            this.OsastonMuutosPaneeli.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.OsastoYleisNakyma)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1572,7 +1727,7 @@
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.RadioButton AikatauluPainikeS5;
         private System.Windows.Forms.RadioButton ProjektiPainikeS5;
-        private System.Windows.Forms.RadioButton radioButton4;
+        private System.Windows.Forms.RadioButton HenkilostoPoistoPainike;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Panel HenkilostoLisaysPaneeli;
         private System.Windows.Forms.Label label6;
@@ -1658,6 +1813,20 @@
         private System.Windows.Forms.Label label28;
         private System.Windows.Forms.TextBox KaikkiHloText;
         private System.Windows.Forms.DataGridView KaikkiYleisNakyma;
+        private System.Windows.Forms.RadioButton OsastoPainikeS5;
+        private System.Windows.Forms.Panel OsastonMuutosPaneeli;
+        private System.Windows.Forms.Button PoistaOsastoPainike;
+        private System.Windows.Forms.Button PaivitaOsastoPainike;
+        private System.Windows.Forms.Button LisaaOsastoPainike;
+        private System.Windows.Forms.Button UusiOsastoPainike;
+        private System.Windows.Forms.DataGridView OsastoYleisNakyma;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.TextBox OsastonKoodiText;
+        private System.Windows.Forms.TextBox OsastoNimiText;
+        private System.Windows.Forms.TextBox OsastoIDText;
+        private System.Windows.Forms.Label label36;
     }
 }
 
