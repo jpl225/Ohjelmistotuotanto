@@ -22,8 +22,8 @@ namespace MySQL_testi
         MySqlCommand command;
         MySqlDataAdapter adapter;
         DataTable table = new DataTable();
-        BindingManagerBase managerBase;
-        MySqlCommandBuilder builder;
+        //BindingManagerBase managerBase;
+        //MySqlCommandBuilder builder;
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -148,6 +148,7 @@ namespace MySQL_testi
             {
                 MessageBox.Show(ex.Message);
             }
+            yht.Close();
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -194,10 +195,9 @@ namespace MySQL_testi
             string koulutus = TutkintoLisays.Text;
             int liksa = Convert.ToInt32(PalkkaLisays.Text);
             double vero = Convert.ToDouble(VeroLisays.Text);
-            string paiva = TulopaivaLisays.Text;
             int osasto = Convert.ToInt32(OsastoLisays.Text);
             kysely = "insert into henkilo values('" + tunnari + "','" + etunimi + "','" + sukunimi + "','"
-                + paikka +"','"+ koulutus +"','" + liksa +"','" + vero + "','" + paiva +"','"+ osasto +"')";
+                + paikka +"','"+ koulutus +"','" + liksa +"','" + vero + "','" + osasto +"')";
             ajaLisays(kysely);
 
         }
@@ -222,6 +222,7 @@ namespace MySQL_testi
             {
                 MessageBox.Show(ex.Message);
             }
+            yht.Close();
         }
 
         private void label14_Click(object sender, EventArgs e)
@@ -235,8 +236,8 @@ namespace MySQL_testi
             int tunnus = Convert.ToInt32(OstunnusLisays.Text);
             string nimi = OsNimiLisays.Text;
             string oskoodi = OsKoodiLisays.Text;
-            kysely = "insert into firma.osasto values ('" + Convert.ToInt32(OstunnusLisays.Text)+"','" 
-                + OsNimiLisays.Text+"','" + OsKoodiLisays.Text+"')";
+            kysely = "insert into firma.osasto values ('" + Convert.ToInt32(OstunnusLisays.Text) + "','" 
+                + OsNimiLisays.Text + "','" + OsKoodiLisays.Text + "')";
             ajaLisays(kysely);
         }
 
@@ -405,21 +406,100 @@ namespace MySQL_testi
 
         private void KaikkiPaneeli_Paint(object sender, PaintEventArgs e)
         {
-            string query = "SELECT * FROM henkilo";
+            string query = "SELECT DISTINCT (htun), enimi, snimi, kunta, tutkinto, palkka, veroprosentti, ostunnus FROM henkilo";
             command = new MySqlCommand(query, connection);
             adapter = new MySqlDataAdapter(command);
+            //connection.Open();
             adapter.Fill(table);
             KaikkiYleisNakyma.DataSource = table;
-            KaikkiHloText.DataBindings.Add("text", table, "htun");
-            KaikkiEtunimiText.DataBindings.Add("text", table, "enimi");
-            KaikkiSukunimiText.DataBindings.Add("text", table, "snimi");
-            KaikkiKuntaText.DataBindings.Add("text", table, "kunta");
-            KaikkiTutkintoText.DataBindings.Add("text", table, "tutkinto");
-            KaikkiPalkkaText.DataBindings.Add("text", table, "palkka");
-            KaikkiVeroText.DataBindings.Add("text", table, "veroprosentti");
-            KaikkiPvmText.DataBindings.Add("text", table, "pvm");
+            //TaytaKentat();
+        }
 
-   
+        private void KaikkiLisaaPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int tunnari = Convert.ToInt32(KaikkiHloText.Text);
+            string etunimi = KaikkiEtunimiText.Text;
+            string sukunimi = KaikkiSukunimiText.Text;
+            string paikka = KaikkiKuntaText.Text;
+            string koulutus = KaikkiTutkintoText.Text;
+            int liksa = Convert.ToInt32(KaikkiPalkkaText.Text);
+            double vero = Convert.ToDouble(KaikkiVeroText.Text);
+            int osasto = Convert.ToInt32(KaikkiOsastoText.Text);
+            kysely = "insert into henkilo values('" + tunnari + "','" + etunimi + "','" + sukunimi + "','"
+                + paikka + "','" + koulutus + "','" + liksa + "','" + vero + "','" + osasto + "')";
+           ajaLisays(kysely);
+        }
+
+        private void TaytaKentat()
+        {
+            KaikkiHloText.Text = KaikkiYleisNakyma.CurrentRow.Cells[0].Value.ToString();
+            KaikkiEtunimiText.Text = KaikkiYleisNakyma.CurrentRow.Cells[1].Value.ToString();
+            KaikkiSukunimiText.Text = KaikkiYleisNakyma.CurrentRow.Cells[2].Value.ToString();
+            KaikkiKuntaText.Text = KaikkiYleisNakyma.CurrentRow.Cells[3].Value.ToString();
+            KaikkiTutkintoText.Text = KaikkiYleisNakyma.CurrentRow.Cells[4].Value.ToString();
+            KaikkiPalkkaText.Text = KaikkiYleisNakyma.CurrentRow.Cells[5].Value.ToString();
+            KaikkiVeroText.Text = KaikkiYleisNakyma.CurrentRow.Cells[6].Value.ToString();
+            KaikkiOsastoText.Text = KaikkiYleisNakyma.CurrentRow.Cells[7].Value.ToString();
+        }
+
+        private void TyhjaaKentat()
+        {
+            KaikkiHloText.Text = "";
+            KaikkiEtunimiText.Text = "";
+            KaikkiSukunimiText.Text = "";
+            KaikkiKuntaText.Text = "";
+            KaikkiTutkintoText.Text = "";
+            KaikkiPalkkaText.Text = "";
+            KaikkiVeroText.Text = "";
+            KaikkiOsastoText.Text = "";
+        }
+
+        private void KaikkiPaivitaPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int tunnari = Convert.ToInt32(KaikkiHloText.Text);
+            string etunimi = KaikkiEtunimiText.Text;
+            string sukunimi = KaikkiSukunimiText.Text;
+            string paikka = KaikkiKuntaText.Text;
+            string koulutus = KaikkiTutkintoText.Text;
+            int liksa = Convert.ToInt32(KaikkiPalkkaText.Text);
+            double vero = Convert.ToDouble(KaikkiVeroText.Text);
+            int osasto = Convert.ToInt32(KaikkiOsastoText.Text);
+            kysely = "UPDATE firma.henkilo SET htun = '" + tunnari + "', enimi = '" + etunimi +
+                "', snimi = '" + sukunimi + "', kunta = '" + paikka + "', tutkinto = '" + koulutus +
+                "', palkka = '" + liksa + "', veroprosentti = '" + vero +
+                "', ostunnus = '" + osasto + "' WHERE htun = '" + tunnari + "'";
+            ajaLisays(kysely);
+        }
+
+        private void KaikkiUusiPainike_Click(object sender, EventArgs e)
+        {
+            TyhjaaKentat();
+        }
+
+        private void KaikkiYleisNakyma_RowContextMenuStripChanged(object sender, DataGridViewRowEventArgs e)
+        {
+            // tee jotain
+        }
+
+        private void KaikkiYleisNakyma_RowEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            // tee jotain
+        }
+
+        private void KaikkiYleisNakyma_Paint(object sender, PaintEventArgs e)
+        {
+            TaytaKentat();
+        }
+
+        private void KaikkiPoistaPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int tunnari = Convert.ToInt32(KaikkiHloText.Text);
+            kysely = "DELETE FROM firma.henkilo WHERE htun = '" + tunnari + "'";
+            ajaLisays(kysely);
+
         }
     }
 }
