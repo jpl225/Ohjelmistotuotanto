@@ -16,9 +16,14 @@ namespace MySQL_testi
         public HenkilostoPainikeS5()
         {
             InitializeComponent();
-            
-
         }
+        // toinen tapa tehdä yhteys
+        MySqlConnection connection = new MySqlConnection("database=firma;datasource = localhost;user=root;password=");
+        MySqlCommand command;
+        MySqlDataAdapter adapter;
+        DataTable table = new DataTable();
+        BindingManagerBase managerBase;
+        MySqlCommandBuilder builder;
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
@@ -152,11 +157,11 @@ namespace MySQL_testi
 
         private void ValintaPainikeS3_Click(object sender, EventArgs e)
         {
-            string komentojono;
+            //string komentojono;
             if (HenkilostoPainikeS3.Checked == true)
             {
                 LisaysPaneeli1.Visible = false;
-                HenkilostoLisays.Visible = true;
+                HenkilostoLisaysPaneeli.Visible = true;
             
             }
             if (OsastoPainikeS3.Checked == true)
@@ -167,11 +172,14 @@ namespace MySQL_testi
             if (ProjektiPainikeS3.Checked == true)
             {
                 LisaysPaneeli1.Visible = false;
+                ProjektinLisaysPaneeli.Visible = true;
                 
             }
             if (AikatauluPainikeS3.Checked == true)
             {
                 LisaysPaneeli1.Visible = false;
+                ProjektiHenkiloPaneeli.Visible = true;
+                ajaComboKysely();
                
             }
         }
@@ -241,6 +249,177 @@ namespace MySQL_testi
         {
             NayttoPaneeli.Visible = false;
             KatseluPaneeli1.Visible = true;
+        }
+
+        private void KatseluPaneeli1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            KatseluPaneeli1.Visible = false;
+            AlkuPaneeli.Visible = true;
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            HenkilostoLisaysPaneeli.Visible = false;
+            LisaysPaneeli1.Visible = true;
+        }
+
+        private void s_Click(object sender, EventArgs e)
+        {
+            OsastoLisaysPaneeli.Visible = false;
+            LisaysPaneeli1.Visible = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            ProjektinLisaysPaneeli.Visible = false;
+            LisaysPaneeli1.Visible = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            LisaysPaneeli1.Visible = false;
+            AlkuPaneeli.Visible = true;
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            MuutosPaneeli1.Visible = false;
+            AlkuPaneeli.Visible = true;
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            PoistoPaneeli1.Visible = false;
+            AlkuPaneeli.Visible = true;
+        }
+
+        private void OsastoPainikeS3_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ajaComboKysely()
+        {
+            //string kysely;
+            string kysely = "SELECT * FROM projekti";
+            string kysely2 = "SELECT * FROM henkilo";
+            MySqlConnectionStringBuilder yr = new MySqlConnectionStringBuilder();
+            yr.Add("Database", "firma");
+            yr.Add("DataSource", "localhost");
+            yr.Add("User Id", "root");
+            yr.Add("Password", "");
+
+            MySqlConnection yht = new MySqlConnection(yr.ConnectionString);
+            MySqlCommand kom = new MySqlCommand(kysely, yht);
+            MySqlCommand kom2 = new MySqlCommand(kysely2, yht);
+            MySqlDataReader lukija;
+            MySqlDataReader lukija2;
+            try
+            {
+                yht.Open();
+                lukija = kom.ExecuteReader();
+                while (lukija.Read())
+                {
+                    string pnro = lukija.GetString("ptun");
+                    string pnimi = lukija.GetString("pnimi");
+                    string jono = pnro + " " + pnimi;
+                    ProjektiPudotusVastaus.Items.Add(jono);
+                }
+                yht.Close();
+                yht.Open();
+                lukija2 = kom2.ExecuteReader();
+                while(lukija2.Read())
+                {
+                    string htun = lukija2.GetString("htun");
+                    string enimi = lukija2.GetString("enimi");
+                    string snimi = lukija2.GetString("snimi");
+                    string nimi = htun + " " + enimi + " " + snimi;
+                    HenkiloPudotusValikko.Items.Add(nimi);
+                }
+                yht.Close();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
+        private void HenkilostoPainikeS5_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void ProjektiHenkiloPaneeli_Paint(object sender, PaintEventArgs e)
+        {
+            
+        }
+
+        private void button6_Click_1(object sender, EventArgs e)
+        {
+            ProjektiHenkiloPaneeli.Visible = false;
+            LisaysPaneeli1.Visible = true;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            string projekti = ProjektiPudotusVastaus.Text;
+            string henkilo = HenkiloPudotusValikko.Text;
+            int vali = henkilo.IndexOf(' ');
+            string htunText = henkilo.Substring(0, vali);
+            int htun = Convert.ToInt32(htunText);
+            int vali2 = projekti.IndexOf(' ');
+            string projText = projekti.Substring(0, vali2);
+            int ptun = Convert.ToInt32(projText);
+            int ttunnit = Convert.ToInt32(TehdytTunnitVastaus.Text);
+            int stunnit = Convert.ToInt32(SuunnitellutTunnitVastaus.Text);
+            kysely = "INSERT INTO projektihenkilo (ptun, htun, tunnit, suun_tunnit) VALUES ("
+                + ptun + ", " + htun + ", " + ttunnit + ", " + stunnit + ");"; 
+            ajaLisays(kysely);
+        }
+
+        private void LisaaProjektiPainike_Click(object sender, EventArgs e)
+        {
+            string kysely;
+            int protun = Convert.ToInt32(ProjektitunTeksti.Text);
+            string pronimi = ProjektiNimiTeksti.Text;
+            int proprio = Convert.ToInt32(ProjektiPrioTeksti.Text);
+            string prosij = ProjektiSijaintiTeksti.Text;
+            kysely = "INSERT INTO projekti (ptun, pnimi, prioriteetti, sijainti) VALUES ('" +
+                protun + "', '" + pronimi + "', '" + proprio + "', '" + prosij + "');";
+            MessageBox.Show(kysely);
+            ajaLisays(kysely);
+        }
+
+        private void KaikkiPaneeli_Paint(object sender, PaintEventArgs e)
+        {
+            string query = "SELECT * FROM henkilo";
+            command = new MySqlCommand(query, connection);
+            adapter = new MySqlDataAdapter(command);
+            adapter.Fill(table);
+            KaikkiYleisNakyma.DataSource = table;
+            KaikkiHloText.DataBindings.Add("text", table, "htun");
+            KaikkiEtunimiText.DataBindings.Add("text", table, "enimi");
+            KaikkiSukunimiText.DataBindings.Add("text", table, "snimi");
+            KaikkiKuntaText.DataBindings.Add("text", table, "kunta");
+            KaikkiTutkintoText.DataBindings.Add("text", table, "tutkinto");
+            KaikkiPalkkaText.DataBindings.Add("text", table, "palkka");
+            KaikkiVeroText.DataBindings.Add("text", table, "veroprosentti");
+            KaikkiPvmText.DataBindings.Add("text", table, "pvm");
+
+   
         }
     }
 }
